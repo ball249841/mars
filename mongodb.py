@@ -34,12 +34,12 @@ currencyDB = 'users'
 dbname = 'test-good1'
 
 def constructor_stock():
-    client = MongoClient("mongodb://ball123:d7VlQuZCm9n8joXj@ac-ddqsiit-shard-00-00.jk5glq6.mongodb.net:27017,ac-ddqsiit-shard-00-01.jk5glq6.mongodb.net:27017,ac-ddqsiit-shard-00-02.jk5glq6.mongodb.net:27017/?ssl=true&replicaSet=atlas-2pq6kt-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0")
+    client = MongoClient("mongodb://mars:KwQiKC7DIKB6GjZ9@ac-ddqsiit-shard-00-00.jk5glq6.mongodb.net:27017,ac-ddqsiit-shard-00-01.jk5glq6.mongodb.net:27017,ac-ddqsiit-shard-00-02.jk5glq6.mongodb.net:27017/?ssl=true&replicaSet=atlas-2pq6kt-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0")
     db = client[stockDB]
     return db
 
 def constructor_currency():
-    client = MongoClient("mongodb://ball123:d7VlQuZCm9n8joXj@ac-ddqsiit-shard-00-00.jk5glq6.mongodb.net:27017,ac-ddqsiit-shard-00-01.jk5glq6.mongodb.net:27017,ac-ddqsiit-shard-00-02.jk5glq6.mongodb.net:27017/?ssl=true&replicaSet=atlas-2pq6kt-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0")
+    client = MongoClient("mongodb://mars:KwQiKC7DIKB6GjZ9@ac-ddqsiit-shard-00-00.jk5glq6.mongodb.net:27017,ac-ddqsiit-shard-00-01.jk5glq6.mongodb.net:27017,ac-ddqsiit-shard-00-02.jk5glq6.mongodb.net:27017/?ssl=true&replicaSet=atlas-2pq6kt-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0")
     db = client[currencyDB]
     return db
 
