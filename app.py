@@ -338,6 +338,27 @@ def handle_message(event):
         line_bot_api.push_message(uid, TextSendMessage(content))
         return 0
 
+################################## 匯率圖 ##############################################
+    if re.match('CT[A-Z]{3}', msg):
+        currency = msg[2:5]
+        if EXRate.getCurrencyName(currency) == '無可支援的外幣':
+            line_bot_api.push_message(uid, TextSendMessage('無可支援的外幣'))
+            return
+        line_bot_api.push_message(uid, TextSendMessage('稍等一下，將會給您匯率走勢圖'))
+        cash_imgur = EXRate.cash_exrate_sixMonth(currency)
+        if cash_imgur == '現金匯率無資料可分析':
+            line_bot_api.push_message(uid, TextSendMessage('現金匯率無資料可分析'))
+        else:
+            line_bot_api.push_message(uid, ImageSendMessage(original_content_url=cash_imgur, preview_image_url=cash_imgur))
+        
+        spot_imgurl = EXRate.spot_exrate_sixMonth(currency)
+        if spot_imgurl == '即期匯率無資料分析':
+            line_bot_api.push_message(uid, TextSendMessage('即期匯率無資料分析'))
+        else:
+            line_bot_api.push_message(uid, ImageSendMessage(original_content_url=cash_imgur, preview_image_url=cash_imgur))
+        btn_msg = Msg_Template.realtime_currency_other(currency)
+        line_bot_api.push_message(uid, btn_msg)
+        return 0
 
 @handler.add(FollowEvent)
 def hand_follow(event):
