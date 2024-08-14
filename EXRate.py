@@ -78,7 +78,7 @@ def showCurrency(code): # code 為外幣代碼
     content +=  f"{currency_name} 最新掛牌時間為: {now_time}\n ---------- \n 現金買入價格: {buying_cash}\n 現金賣出價格: {sold_cash}\n 即期買入價格: {buying_spot}\n 即期賣出價格: {sold_spot}\n \n"
     return content
 
-def csah_exrate_sixMonth(code1) -> "USA":
+def cash_exrate_sixMonth(code1) -> "USA":
     currency_name = getCurrencyName(code1)
     if currency_name == '無可支援的外幣': return '無可支援的外幣'
     dfs = pd.read_html(f'https://rate.bot.com.tw/xrt/quote/l6m/{code1}')
