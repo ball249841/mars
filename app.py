@@ -301,7 +301,7 @@ def handle_message(event):
                             ),
                             URIAction(
                                 label='嗨皮漫畫',
-                                uri='https://liff.line.me/2006134057-ABmv37Lb'
+                                uri='https://liff.line.me/2006134057-Ml8mn5XO'
                             )
                         ]
                     )
