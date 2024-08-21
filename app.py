@@ -276,9 +276,9 @@ def handle_message(event):
                                 label='other bot',
                                 text='imgur bot'
                             ),
-                            MessageAction(
-                                label='油價查詢',
-                                text='油價查詢'
+                            URIAction(
+                                label='facebook',
+                                uri='https://liff.line.me/2006134057-Vo4vejnL'
                             ),
                             URIAction(
                                 label='奇摩股市',
