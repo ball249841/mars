@@ -16,10 +16,12 @@ import mongodb
 import twder
 import time
 import json
+import place
 
 app = Flask(__name__)
 IMGUR_CLIENT_ID = "fc280e832eb18a5"
 access_token = 'YOmEDx1ArUQEtgjHtsEd/V3Ds+QCet74jEk8psUseizhdZo5/s4TY+7G3VX3OpmNsVXOnRDqefHW1cMbVAod5/kLN/wEYInGSKyqMWNm6eQym3GSuPIF8KdviR6JELjCG5jf4EsdN7BWUmumvBEBvgdB04t89/1O/w1cDnyilFU='
+mat_d = {}
 
 import yfinance as yf
 import mplfinance as mpf
@@ -475,6 +477,17 @@ def handle_message(event):
         while True: 
             schedule.run_pending()
             time.sleep(1)
+
+
+    if re.match('最新氣象|查詢天氣|天氣查詢|weather|Weather', msg):
+        content = place.img_Carousel()
+        line_bot_api.reply_message(event.reply_token,content)
+        return 0
+    if re.match('即時天氣|即時氣象', msg):
+        mat_d[uid]= '即時天氣'
+        content = place.quick_reply_weather(mat_d[uid])
+        line_bot_api.reply_message(event.reply_token, content)
+        return 0
 
 
 import os
