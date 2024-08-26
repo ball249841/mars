@@ -381,7 +381,7 @@ def img_Carousel():
                         "contents": [
                         {
                             "type": "image",
-                            "url": "https://i.imgur.com/wQcsTzT.jpg",
+                            "url": "https://i.imgur.com/AxcLDy3.png",
                             "flex": 1,
                             "action": {
                             "type": "message",
@@ -394,7 +394,7 @@ def img_Carousel():
                         },
                         {
                             "type": "image",
-                            "url": "https://i.imgur.com/jKqO32C.jpg",
+                            "url": "https://i.imgur.com/k6w7aB4.png",
                             "aspectMode": "cover",
                             "gravity": "center",
                             "action": {
@@ -413,19 +413,19 @@ def img_Carousel():
                         "contents": [
                         {
                             "type": "image",
-                            "url": "https://i.imgur.com/KCCL1B2.jpg",
+                            "url": "https://i.imgur.com/PUMov0M.png",
                             "aspectMode": "cover",
                             "gravity": "center",
                             "action": {
                             "type": "message",
                             "label": "action",
-                            "text": "即時天氣"
+                            "text": "查詢天氣"
                             },
                             "size": "full"
                         },
                         {
                             "type": "image",
-                            "url": "https://i.imgur.com/Iwmkr0V.jpg",
+                            "url": "https://i.imgur.com/igAPSmZ.png",
                             "size": "full",
                             "aspectMode": "cover",
                             "aspectRatio": "150:150",
@@ -433,7 +433,7 @@ def img_Carousel():
                             "action": {
                             "type": "message",
                             "label": "action",
-                            "text": "天氣預報"
+                            "text": "地震資訊"
                             }
                         }
                         ],
