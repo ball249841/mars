@@ -27,7 +27,7 @@ IMGUR_CLIENT_ID = "fc280e832eb18a5"
 access_token = 'YOmEDx1ArUQEtgjHtsEd/V3Ds+QCet74jEk8psUseizhdZo5/s4TY+7G3VX3OpmNsVXOnRDqefHW1cMbVAod5/kLN/wEYInGSKyqMWNm6eQym3GSuPIF8KdviR6JELjCG5jf4EsdN7BWUmumvBEBvgdB04t89/1O/w1cDnyilFU='
 mat_d = {}
 
-model = load_model('mnist_cnn_,odel.h5')
+model = load_model('mnist_cnn_model.h5')
 
 def preprocess_image(image):
     image = image.convert('L')
