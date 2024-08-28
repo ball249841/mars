@@ -17,11 +17,26 @@ import twder
 import time
 import json
 import place
+import numpy as np
+from tensorflow.keras.models import load_model
+from PIL import Image
+import io
 
 app = Flask(__name__)
 IMGUR_CLIENT_ID = "fc280e832eb18a5"
 access_token = 'YOmEDx1ArUQEtgjHtsEd/V3Ds+QCet74jEk8psUseizhdZo5/s4TY+7G3VX3OpmNsVXOnRDqefHW1cMbVAod5/kLN/wEYInGSKyqMWNm6eQym3GSuPIF8KdviR6JELjCG5jf4EsdN7BWUmumvBEBvgdB04t89/1O/w1cDnyilFU='
 mat_d = {}
+
+model = load_model('mnist_cnn_,odel.h5')
+
+def preprocess_image(image):
+    image = image.convert('L')
+    image = image.resize((28, 28))
+    image = np.array(image)
+    image = image / 255.0
+    image = np.expand_dims(image, axis=0)
+    image = np.expand_dims(image, axis=-1)
+    return image
 
 import yfinance as yf
 import mplfinance as mpf
@@ -127,18 +142,9 @@ def callback():
 
     # handle webhook body
     try:
-        handler.handle(body, signature)
-        json_data = json.loads(body)
-        reply_token = json_data['events'][0]['replyToken']
-        user_id = json_data['events'][0]['source']['userId']
-        print(json_data)
-        if 'message' in json_data['events'][0]:
-            if json_data['events'][0]['message']['type'] == 'text':
-                text = json_data['events'][0]['message']['text']
-                if text == '雷達回波圖' or text == '雷達回波':
-                    reply_image(f'https://cwbopendata.s3.ap-northeast-1.amazonaws.com/MSC/O-A0058-003.png?{time.time()}', reply_token, access_token)
-    except :
-        print('error')
+        handler.handle(body, signature)    
+    except InvalidSignatureError:
+        print(400)
     return 'OK'
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
@@ -479,6 +485,23 @@ def handle_message(event):
             time.sleep(1)
 
 
+    msg = event.message.text
+
+    if re.match('圖像辨識', msg):
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text='請上船一張照片進行圖像辨識')
+        )
+
+    if re.match('雷達回波', msg):
+        url = 'https://www.cwa.gov.tw/Data/radar/CV1_3600.png'
+        radar_img = ImageSendMessage(
+            original_content_url=url,
+            preview_image_url=url
+        )
+        line_bot_api.reply_message(event.reply_token, radar_img)
+
+
     if re.match('最新氣象|查詢天氣|天氣查詢|weather|Weather', msg):
         content = place.img_Carousel()
         line_bot_api.reply_message(event.reply_token,content)
@@ -489,6 +512,21 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, content)
         return 0
 
+
+@handler.add(MessageEvent, message=ImageMessage)
+def handle_image_message(event):
+    message_content = line_bot_api.get_message_content(event.message.id)
+    image = Image.open(io.BytesIO(message_content.content))
+
+    image = preprocess_image(image)
+
+    prediction = model.predict(image)
+    digit = np.argmax(prediction)
+
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text=f'預測的數字是: {digit}')
+    )
 
 import os
 if __name__ == "__main__":
